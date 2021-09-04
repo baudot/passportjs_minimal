@@ -17,6 +17,16 @@ app.use(passport.session());
 app.use(flash());
 app.use(express.static('dist'));
 
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
+
 passport.use(new LocalStrategy(
   function(username, password, done) {
       console.log('Attempting localstrategy.');
