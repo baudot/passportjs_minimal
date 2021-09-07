@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
@@ -54,6 +55,11 @@ app.post('/login',
                                     failureRedirect: '/login.html',
                                     failureFlash: true})
 );
+
+app.post('/create_user.html', (req, res) => {
+  User.create(req.body);
+  res.send('Created user.');
+});
 
 app.get('login', () => {
   res.send('app.get : login');
