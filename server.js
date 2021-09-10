@@ -31,7 +31,7 @@ passport.deserializeUser(function(id, done) {
 passport.use(new LocalStrategy(
   function(username, password, done) {
       console.log('Attempting localstrategy.');
-      User.findOne({username: username }, function(err, user) {
+      User.findOne(username, function(err, user) {
         if (err) {
           console.log('findUser returned an error: ', err);
           return done(err);
